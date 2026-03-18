@@ -1,139 +1,142 @@
-<p align="center">
-  <picture>
-      <source media="(prefers-color-scheme: dark)" srcset="docs/assets/logo-dark.svg">
-      <source media="(prefers-color-scheme: light)" srcset="docs/assets/logo-light.svg">
-      <img height="100" alt="Endee" src="docs/assets/logo-dark.svg">
-  </picture>
-</p>
+# Resume Analyzer
 
-<p align="center">
-    <b>High-performance open-source vector database for AI search, RAG, semantic search, and hybrid retrieval.</b>
-</p>
-
-<p align="center">
-    <a href="./docs/getting-started.md"><img src="https://img.shields.io/badge/Quick_Start-Local_Setup-success?style=flat-square" alt="Quick Start"></a>
-    <a href="https://docs.endee.io/quick-start"><img src="https://img.shields.io/badge/Docs-Quick_Start-success?style=flat-square" alt="Docs"></a>
-    <a href="https://github.com/endee-io/endee/blob/master/LICENSE"><img src="https://img.shields.io/github/license/endee-io/endee?style=flat-square" alt="License"></a>
-    <a href="https://discord.gg/5HFGqDZQE3"><img src="https://img.shields.io/badge/Discord-Join_Chat-5865F2?logo=discord&style=flat-square" alt="Discord"></a>
-    <a href="https://endee.io/"><img src="https://img.shields.io/badge/Website-Endee-111111?style=flat-square" alt="Website"></a>
-    <!-- <a href="https://endee.io/benchmarks"><img src="https://img.shields.io/badge/Benchmarks-Coming_Soon-1F8B4C?style=flat-square" alt="Benchmarks"></a> -->
-    <!-- <a href="https://endee.io/cloud"><img src="https://img.shields.io/badge/Cloud-Coming_Soon-2496ED?style=flat-square" alt="Cloud"></a> -->
-</p>
-
-<p align="center">
-<strong><a href="./docs/getting-started.md">Quick Start</a> • <a href="#why-endee">Why Endee</a> • <a href="#use-cases">Use Cases</a> • <a href="#features">Features</a> • <a href="#api-and-clients">API and Clients</a> • <a href="#docs-and-links">Docs</a> • <a href="#community-and-contact">Contact</a></strong>
-</p>
-
-# Endee: Open-Source Vector Database for AI Search
-
-**Endee** is a high-performance open-source vector database built for AI search and retrieval workloads. It is designed for teams building **RAG pipelines**, **semantic search**, **hybrid search**, recommendation systems, and filtered vector retrieval APIs that need production-oriented performance and control.
-
-Endee combines vector search with filtering, sparse retrieval support, backup workflows, and deployment flexibility across local builds and Docker-based environments. The project is implemented in C++ and optimized for modern CPU targets, including AVX2, AVX512, NEON, and SVE2.
-
-If you want the fastest path to evaluate Endee locally, start with the [Getting Started guide](./docs/getting-started.md) or the hosted docs at [docs.endee.io](https://docs.endee.io/quick-start).
-
-## Why Endee
-
-- Built as a dedicated vector database for AI applications, search systems, and retrieval-heavy workloads.
-- Supports dense vector retrieval plus sparse search capabilities for hybrid search use cases.
-- Includes payload filtering for metadata-aware retrieval and application-specific query logic.
-- Ships with operational features already documented in this repo, including backup flows and runtime observability.
-- Offers flexible deployment paths: local scripts, manual builds, Docker images, and prebuilt registry images.
-
-## Getting Started
-
-The full installation, build, Docker, runtime, and authentication instructions are in [docs/getting-started.md](./docs/getting-started.md).
-
-Fastest local path:
-
-```bash
-chmod +x ./install.sh ./run.sh
-./install.sh --release --avx2
-./run.sh
-```
-
-The server listens on port `8080`. For detailed setup paths, supported operating systems, CPU optimization flags, Docker usage, and authentication examples, use:
-
-- [Getting Started](./docs/getting-started.md)
-- [Hosted Quick Start Docs](https://docs.endee.io/quick-start)
-
-## Use Cases
-
-### RAG and AI Retrieval
-
-Use Endee as the retrieval layer for question answering, chat assistants, copilots, and other RAG applications that need fast vector search with metadata-aware filtering.
-
-### Agentic AI and AI Agent Memory
-
-Use Endee as the long-term memory and context retrieval layer for AI agents built with frameworks like LangChain, CrewAI, AutoGen, and LlamaIndex. Store and retrieve past observations, tool outputs, conversation history, and domain knowledge mid-execution with low-latency filtered vector search, so your autonomous agents get the right context without stalling their reasoning loop.
-
-### Semantic Search
-
-Build semantic search experiences for documents, products, support content, and knowledge bases using vector similarity search instead of exact keyword-only matching.
-
-### Hybrid Search
-
-Combine dense retrieval, sparse vectors, and filtering to improve relevance for search workflows where both semantic understanding and term-level precision matter.
-
-### Recommendations and Matching
-
-Support recommendation, similarity matching, and nearest-neighbor retrieval workflows across text, embeddings, and other high-dimensional representations.
+A smart resume analysis and search application built with Streamlit and Endee vector database. Upload resumes, generate embeddings, and search through them using natural language queries.
 
 ## Features
 
-- **Vector search** for AI retrieval and semantic similarity workloads.
-- **Hybrid retrieval support** with sparse vector capabilities documented in [docs/sparse.md](./docs/sparse.md).
-- **Payload filtering** for structured retrieval logic documented in [docs/filter.md](./docs/filter.md).
-- **Backup APIs and flows** documented in [docs/backup-system.md](./docs/backup-system.md).
-- **Operational logging and instrumentation** documented in [docs/logs.md](./docs/logs.md) and [docs/mdbx-instrumentation.md](./docs/mdbx-instrumentation.md).
-- **CPU-targeted builds** for AVX2, AVX512, NEON, and SVE2 deployments.
-- **Docker deployment options** for local and server environments.
+- **PDF Resume Parsing**: Extract and process resume content from PDF files
+- **Vector Embeddings**: Transform resume text into semantic embeddings using SentenceTransformer
+- **Semantic Search**: Query resumes using natural language and find the most relevant matches
+- **Vector Database**: Store and manage embeddings efficiently using Endee
+- **Interactive UI**: User-friendly Streamlit interface for easy interaction
 
-## API and Clients
+## Tech Stack
 
-Endee exposes an HTTP API for managing indexes and serving retrieval workloads. The current repo documentation and examples focus on running the server directly and calling its API endpoints.
+- **[Streamlit](https://streamlit.io/)** - Web application framework
+- **[PyPDF2](https://pypi.org/project/PyPDF2/)** - PDF text extraction
+- **[Sentence Transformers](https://www.sbert.net/)** - Semantic embeddings (all-MiniLM-L6-v2 model)
+- **[Endee](https://github.com/endee-ai/endee)** - Vector database for semantic search
+- **[Docker](https://www.docker.com/)** - Containerization (optional)
 
-Current developer entry points:
+## Prerequisites
 
-- [Getting Started](./docs/getting-started.md) for local build and run flows
-- [Hosted Docs](https://docs.endee.io/quick-start) for product documentation
-- [Release Notes 1.0.0](https://github.com/endee-io/endee/releases/tag/1.0.0) for recent platform changes
+- Python 3.8 or higher
+- Endee service running (default: `localhost:8080`)
 
-## Docs and Links
+## Installation
 
-- [Getting Started](./docs/getting-started.md)
-- [Hosted Documentation](https://docs.endee.io/quick-start)
-- [Release Notes](https://github.com/endee-io/endee/releases/tag/1.0.0)
-- [Sparse Search](./docs/sparse.md)
-- [Filtering](./docs/filter.md)
-- [Backups](./docs/backup-system.md)
+### Local Setup
 
-## Community and Contact
+1. **Create a virtual environment** (optional but recommended):
+   ```bash
+   python -m venv .venv
+   # On Windows
+   .venv\Scripts\activate
+   # On macOS/Linux
+   source .venv/bin/activate
+   ```
 
-- Join the community on [Discord](https://discord.gg/5HFGqDZQE3)
-- Visit the website at [endee.io](https://endee.io/)
-- For trademark or branding permissions, contact [enterprise@endee.io](mailto:enterprise@endee.io)
+2. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Ensure Endee is running**:
+   ```bash
+   docker-compose up -d
+   ```
+   Or ensure you have an Endee instance accessible at `localhost:8080`
+
+### Docker Setup
+
+1. **Build and run with Docker Compose**:
+   ```bash
+   docker-compose up --build
+   ```
+
+This will start both the Streamlit app and the Endee vector database.
+
+## Usage
+
+### Running the Application
+
+```bash
+streamlit run app.py
+```
+
+The application will be available at `http://localhost:8501`
+
+### Basic Workflow
+
+1. **Upload Resumes**: Use the file uploader to select PDF resume files
+2. **Process & Index**: The app automatically extracts text and creates embeddings
+3. **Search**: Enter natural language queries to find relevant resumes
+4. **View Results**: See the top 5 most relevant matches with similarity scores
+
+## Project Structure
+
+```
+Resume_analyzer/
+├── app.py                 # Main Streamlit application
+├── requirements.txt       # Python dependencies
+├── docker-compose.yml     # Docker Compose configuration
+└── README.md             # This file
+```
+
+## Key Configuration
+
+- **Index Name**: `resumes`
+- **Embedding Dimension**: 384 (MiniLM model output size)
+- **Embedding Model**: `all-MiniLM-L6-v2` (lightweight, efficient)
+- **Search Method**: Cosine similarity
+- **Top Results**: 5 most relevant resumes per query
+
+## API Integration
+
+The app connects to Endee using the Python client:
+
+```python
+from endee import Endee
+
+client = Endee("localhost:8080")
+index = client.get_index("resumes")
+```
+
+## Troubleshooting
+
+### Connection Error to Endee
+
+- Ensure Endee service is running: `docker-compose up -d`
+- Check that `localhost:8080` is accessible
+- Verify no port conflicts on port 8080
+
+### Embedding Generation Issues
+
+- Ensure sufficient memory for the SentenceTransformer model
+- Model will be downloaded on first use (~100MB)
+
+### PDF Processing Issues
+
+- Ensure PDFs are not password-protected
+- Check that PDFs contain extractable text (not scanned images)
+
+## Future Enhancements
+
+- Support for multiple file formats (DOCX, TXT)
+- Resume quality scoring
+- Skill extraction and matching
+- Batch upload and processing
+- Full-text indexing alongside embeddings
+- Advanced filtering and faceted search
 
 ## Contributing
 
-We welcome contributions from the community to help make vector search faster and more accessible for everyone.
-
-- Submit pull requests for fixes, features, and improvements
-- Report bugs or performance issues through GitHub issues
-- Propose enhancements for search quality, performance, and deployment workflows
+Contributions are welcome! Please feel free to submit issues and pull requests.
 
 ## License
 
-Endee is open source software licensed under the **Apache License 2.0**. See the [LICENSE](./LICENSE) file for full terms.
+See the LICENSE file in the project root for details.
 
-## Trademark and Branding
+## Support
 
-“Endee” and the Endee logo are trademarks of Endee Labs.
-
-The Apache License 2.0 does not grant permission to use the Endee name, logos, or branding in a way that suggests endorsement or affiliation.
-
-If you offer a hosted or managed service based on this software, you must use your own branding and avoid implying it is an official Endee service.
-
-## Third-Party Software
-
-This project includes or depends on third-party software components licensed under their respective open-source licenses. Use of those components is governed by their own license terms.
+For issues or questions, please check the project's issue tracker or refer to the [Endee documentation](https://github.com/endee-ai/endee).
